@@ -1,0 +1,13 @@
+
+scripts="/c/OpenOCD/scripts/"
+
+build
+    cargo build --target thumbv7em-none-eabi
+flash, run server
+    openocd -s $scripts -f $scripts/interface/stlink.cfg -f $scripts/target/stm32f3x.cfg -c "bindto 0.0.0.0"
+
+
+run gdb
+    gdb -q -ex "target remote :3333" ~/workspace/discovery/target/thumbv7em-none-eabi/debug/led-roulette
+
+    
