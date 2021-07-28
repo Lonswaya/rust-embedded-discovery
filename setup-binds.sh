@@ -1,6 +1,8 @@
+echo "Setting up discovery env"
+
 DISCOVERY_SCRIPTS="/c/OpenOCD/scripts/"
 
-alias discovery_build="cargo build --target thumbv7em-none-eabi"
+alias discovery_build="cargo build --target thumbv7em-none-eabihf"
 
 function discovery_debug_server {
 	local current_directory=$PWD
@@ -14,8 +16,15 @@ function discovery_debug_server {
 
 	cd $current_directory
 }
+
 function discovery_debug {
 	# Pass the name of the binary that you want to run
-	echo "Starting binary found at ~/workspace/discovery/target/thumbv7em-none-eabi/debug/$1"
-	gdb -q -ex "target remote :3333" ~/workspace/discovery/target/thumbv7em-none-eabi/debug/$1
+    # I find mine under ~/workspace/discovery/target/thumbv7em-none-eabihf/debug/
+	echo "Starting binary found at $1"
+	gdb -q -ex "target remote :3333" $1
+}
+
+function discovery_verify {
+    # todo
+	echo "todo"
 }
